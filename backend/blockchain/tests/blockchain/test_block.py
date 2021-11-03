@@ -9,3 +9,7 @@ def test_mine_block():
     assert block.data == data
     assert block.last_hash == last_block
     
+def test_genesis():
+    genesis = Block.genesis()
+
+    assert isinstance(genesis, Block)
