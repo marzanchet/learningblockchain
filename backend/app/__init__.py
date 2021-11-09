@@ -11,6 +11,6 @@ def default():
 
 @app.route('/blockchain')
 def route_blockchain():
-    return blockchain.__repr__()
+    return jsonify(blockchain)
 
 app.run(port=5001)
