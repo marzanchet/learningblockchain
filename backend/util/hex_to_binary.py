@@ -16,8 +16,7 @@ HEX_TO_BINARY_CONVERSION_TABLE = {
     'c': '1100',
     'd': '1101',
     'e': '1110',
-    'f': '1111',
-
+    'f': '1111'
 }
 
 def hex_to_binary(hex_string):
@@ -38,3 +37,9 @@ def main():
 
     original_number = int(binary_number, 2)
     print(f'original_number: {original_number}')
+
+    hex_to_binary_crypto_hash = hex_to_binary(crypto_hash('test-data'))
+    print(f'hex_to_binary_crypto_hash: {hex_to_binary_crypto_hash}')
+
+if __name__ == '__main__':
+    main()

@@ -1,7 +1,7 @@
 import time
-import backend.blockchain.blockchain import Blockchain
-from backend.config import SECONDS
 
+from backend.blockchain.blockchain import Blockchain
+from backend.config import SECONDS
 
 blockchain = Blockchain()
 
