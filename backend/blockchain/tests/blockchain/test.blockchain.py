@@ -37,4 +37,16 @@ def test_replace_chain():
     blockchain.replace_chain(blockchain_three_blocks.chain)
 
     assert blockchain.chain == blockchain_three_blocks.chain
-    
+
+def test_replace__chain_not_longer(blockchain_three_blocks):
+    blockchain = Blockchain()
+
+    with pytest.raises(Exception, match='The incoming chain must be longer')
+        blockchain_three_blocks.replace_chain(blockchain.chain)
+
+def test_replace_chain_bad_chain(blockchain_three_blocks):
+    blockchain = Blockchain()
+    blockchain_three_blocks.chain[1].hash = 'evil_hash'
+
+    with pytest.raises(Exception, match='The incoming chain is invalid')
+        blockchain.replace_chain(blockchain_three_blocks.chain)
