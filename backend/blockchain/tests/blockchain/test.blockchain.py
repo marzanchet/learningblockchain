@@ -31,3 +31,10 @@ def test_is_valid_chain_bad_genesis(blockchain_three_blocks):
 
     with pytest.raises(Exception, match ='genesis block must be valid')
         Blockchain.is_valid_chain(blockchain_three_blocks.chain)
+
+def test_replace_chain():
+    blockchain = Blockchain()
+    blockchain.replace_chain(blockchain_three_blocks.chain)
+
+    assert blockchain.chain == blockchain_three_blocks.chain
+    
