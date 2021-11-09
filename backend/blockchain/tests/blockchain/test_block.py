@@ -57,19 +57,16 @@ def last_block():
     return Block.genesis()
 
 @pytest.fixture
-def block(last_block)
+def block(last_block):
+    return Block.mine_block(last_block, 'test_data')
 
-def test_is_valid_block():
-    last_block = Block.genesis()
-    block = Block.mine_block(last_block, 'test_data')
+def test_is_valid_block(last_block, block):
     Block.is_valid_block(last_block, block)
     
-def test_is_valid_block_bad_last_hash():
-    last_block = Block.genesis()
-    block = Block.mine_block(last_block, 'test_data')
+def test_is_valid_block_bad_last_hash(last_block, block):
     Block.last_hash = 'evil_last_hash'
 
     with pytest.raises(Exception, match='last_hash must be correct'):
         Block.is_valid_block(last_block, block)
 
-def test_is_valid_bad_proof_of_work():
+#def test_is_valid_bad_proof_of_work(last_block, block):
