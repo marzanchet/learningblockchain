@@ -78,4 +78,13 @@ def test_is_valid_block_bad_proof_of_work(last_block, block):
 def test_is_valid_block_jumped_difficulty(last_block, block):
     jumped_difficulty = 10
     block.difficulty = jumped_difficulty
-    block.hash = f'{"0" * jumped_difficulty}'
+    block.hash = f'{"0" * jumped_difficulty}111abc'
+    
+    with pytest.raises(Exception, match='difficulty must only adjust by one'):
+        Block.is_valid_block(last_block, block)
+
+def test_is_valid_block_bad_block_hash(last_block, block):
+    block.hash = '000000000000000000bbbabc'
+    
+    with pytest.raises(Exception, match='difficulty must only adjust by one'):
+            Block.is_valid_block(last_block, block)
