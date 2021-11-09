@@ -4,6 +4,8 @@ from typing import ChainMap
 from pubnub.pubnub import PubNub
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.callbacks import SubscribeCallback
+from backend.blockchain.block import Block
+
 
 pnconfig = PNConfiguration()
 pnconfig.subscribe_key = ''
@@ -22,7 +24,7 @@ class Listener(SubscribeCallback):
             print(f'Incoming message_object: {message_object} Message: {message_object.message}')
 
             if message_object.channel == CHANNELS['BLOCK']:
-                block = message_object.message
+                block = Block.from_json(message_object.message)
                 potential_chain = self.blockchain.chain[:len(self.blockchain.chain)]
                 potential_chain.append(block)
 
