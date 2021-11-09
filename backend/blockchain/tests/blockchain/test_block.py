@@ -1,3 +1,4 @@
+import pytest
 import time
 
 from backend.blockchain.block import Block, GENESIS_DATA
@@ -56,3 +57,10 @@ def test_is_valid_block():
     block = Block.mine_block(last_block, 'test_data')
     Block.is_valid_block(last_block, block)
     
+def test_is_valid_block_bad_last_hash():
+    last_block = Block.genesis()
+    block = Block.mine_block(last_block, 'test_data')
+    Block.last_hash = 'evil_last_hash'
+
+    with pytest.raises(Exception, match='last_hash must be correct'):
+        Block.is_valid_block(last_block, block)
