@@ -38,7 +38,8 @@ class Wallet:
         """
         self.public_key_bytes = self.public_key.public_bytes(encoding=serialization.Encoding.PEM,format=serialization.PublicFormat.SubjectPublicKeyInfo)
         print(f'self.public_key_bytes: {self.public_key_bytes}')
-
+        decoded_public_key = self.public_key_bytes.decode('utf-8')
+        print(f'decoded_public_key: {decoded_public_key}')
     @staticmethod
     def verify(public_key, data, signature):
         """
