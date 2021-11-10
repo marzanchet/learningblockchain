@@ -36,15 +36,18 @@ class Wallet:
         """
         Reset the public key to its serialized version
         """
-        self.public_key_bytes = self.public_key.public_bytes(encoding=serialization.Encoding.PEM,format=serialization.PublicFormat.SubjectPublicKeyInfo)
-        print(f'self.public_key_bytes: {self.public_key_bytes}')
-        decoded_public_key = self.public_key_bytes.decode('utf-8')
-        print(f'decoded_public_key: {decoded_public_key}')
+       self.public_key = self.public_key.public_bytes(encoding=serialization.Ecoding.PEM, format=serialization.PublicFormat.SubjectPublicKeyInfo).decode('utf-8')
+
     @staticmethod
     def verify(public_key, data, signature):
         """
         Verify a signature based on the original public key and data.
         """
+        deserialized_public_key = serialization.load_pem_public_key(
+            public_key.encode('utf-8'),
+            default_backend()
+        )
+
         try:
             public_key.verify(
                 signature,
